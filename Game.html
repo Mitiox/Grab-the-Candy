@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        body {
+            background-color: #A8D5A8;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Candy{
+            background: linear-gradient(45deg,#B298E7 0%, #B8E3E9 33.3% ,#F5B8D5 66.6%,#F9BEDD 100%);
+            color:#080808;
+            font-size: 18px;
+            font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 10px 20px;
+            border: 2px solid #471123;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px rgba(107, 75, 163, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.5s, background 0.5s; 
+
+        }
+
+        .Candy:hover {
+            box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
+            transform: translateX(-300px);
+            transition: transform 0.50s ease, box-shadow 0.5s, background 0.5s;
+            cursor: grab;
+
+        }
+
+        .Candy:active {
+            transform: translateY(300px);
+            box-shadow: 0 8px 20px rgba(107, 75, 163, 0.4);
+            transition: transform 0.50s ease, box-shadow 0.5s, background 0.5s;
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body>
+    <button class="Candy"></button >
+</body>
+</html>
