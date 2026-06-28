@@ -6,48 +6,60 @@
     <title>Game</title>
     <style>
         body {
-            background-color: #A8D5A8;
-            margin: 0;
-            height: 100vh;
-            display: flex;
+            background: linear-gradient(to right, #FFF8EE, #FFFDE8);     /* Background of the whole page , cand be a solid colour or a gradient */
+            margin: 0px;/* Margin by defualt is 8px, so we set it to 0px to remove the default margin */ 
+            height: 100vh; /* Page height is 100% of the viewport height */
+            display: flex; /* To control alignement of elements */
+            /* We can now align the button due to flex bo */
             justify-content: center;
             align-items: center;
-        }
+            }
 
         .Candy{
+            /* Use the give the cotton candy type aesthic to the button */
             background: linear-gradient(45deg,#B298E7 0%, #B8E3E9 33.3% ,#F5B8D5 66.6%,#F9BEDD 100%);
             color:#080808;
             font-size: 18px;
+            /* Currently unsed */
             font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 10px 20px;
+            /* Size of the candy */
+            padding: 15px 30px;
             border: 2px solid #471123;
-            text-transform: uppercase;
-            border-radius: 4px;
+
+            /* Roundness of the candy , if equal to height and width , we get a circle candy */
+            border-radius: 10px;
             cursor: pointer;
+            /* Unused , might use alter*/
             font-weight: 600;
             letter-spacing: 0.5px;
+            /* Makes it feels like Candy is floating */
             box-shadow: 0 8px 20px rgba(107, 75, 163, 0.4);
+            /* Soul of the Candy , this it what makes it glide instead of snap */
             transition: transform 0.5s ease, box-shadow 0.5s, background 0.5s; 
 
         }
 
-        .Candy:hover {
+        .Candy:hover { /* Psuedo state when cursor is above the candy */
+            /* Shadow grows bigger , as if cnady rose up */
             box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
+            /* The backbone , sends candy to left */
             transform: translateX(-300px);
-            transition: transform 0.50s ease, box-shadow 0.5s, background 0.5s;
+            /* Attention to detail mamamia */
             cursor: grab;
 
         }
 
-        .Candy:active {
+        .Candy:active { /* Psuedo state when cursor grabs the candy */
+            /* Candy runs down 300px */
             transform: translateY(300px);
             box-shadow: 0 8px 20px rgba(107, 75, 163, 0.4);
-            transition: transform 0.50s ease, box-shadow 0.5s, background 0.5s;
+            /* Cursor changes , its in the name */
             cursor: grabbing;
         }
     </style>
 </head>
 <body>
+    <!-- Our candy , Inherits its properties from its class , Its a button with no text -->
     <button class="Candy"></button >
 </body>
 </html>
