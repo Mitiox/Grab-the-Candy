@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background Gradients</title> 
+</head>
+<body>
+<style>
+  .tbl { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; margin-top: 1rem; }
+  .tbl th { text-align: left; padding: 8px 12px; color: var(--text-muted); font-weight: 500; border-bottom: 0.5px solid var(--border); font-size: 12px; }
+  .tbl td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .swatch { width: 100%; height: 44px; border-radius: 6px; border: 0.5px solid var(--border); }
+  .name { font-weight: 500; color: var(--text-primary); font-size: 13px; }
+  .vibe { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .hexes { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+  .copy-btn { font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer; border: 0.5px solid var(--border-strong); background: var(--surface-1); color: var(--text-secondary); white-space: nowrap; }
+  .copy-btn:active { transform: scale(0.96); }
+  .section-row td { background: var(--surface-1); font-size: 11px; font-weight: 500; color: var(--text-muted); padding: 6px 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+  th:nth-child(1) { width: 18%; }
+  th:nth-child(2) { width: 20%; }
+  th:nth-child(3) { width: 42%; }
+  th:nth-child(4) { width: 12%; }
+  th:nth-child(5) { width: 8%; }
+</style>
+
+
+<table class="tbl">
+  <thead>
+    <tr>
+      <th>Preview</th>
+      <th>Name</th>
+      <th>Hex codes</th>
+      <th>Direction</th>
+      <th>Copy</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<script>
+const sections = [
+  {
+    label: "Yellow-pink inspired",
+    items: [
+      { name: "Sunset punch",    vibe: "Yellow · pink",           stops: ["#FFE135","#FF6B9D"],           dir: "to right" },
+      { name: "Mango flamingo",  vibe: "Amber · deep pink",       stops: ["#FFCF40","#FF4E8C"],           dir: "to right" },
+      { name: "Peach aurora",    vibe: "Gold · blush · magenta",  stops: ["#FFD580","#FF85A1","#D94FBF"], dir: "to right" },
+      { name: "Citrus rose",     vibe: "Lemon · rose",            stops: ["#F9F047","#FF6EB4"],           dir: "to right" },
+      { name: "Golden magenta",  vibe: "Gold · electric purple",  stops: ["#FFC200","#E040FB"],           dir: "to right" },
+      { name: "Tropical blush",  vibe: "Yellow · peach · pink",   stops: ["#FFE066","#FFA07A","#FF69B4"], dir: "to right" },
+    ]
+  },
+  {
+    label: "Diverse colour families",
+    items: [
+      { name: "Ocean to sky",    vibe: "Blue · teal",             stops: ["#0EA5E9","#06EE9E"],           dir: "to right" },
+      { name: "Purple haze",     vibe: "Violet · blue",           stops: ["#7C3AED","#3B82F6"],           dir: "to right" },
+      { name: "Emerald dusk",    vibe: "Green · indigo",          stops: ["#10B981","#6366F1"],           dir: "to right" },
+      { name: "Candy aurora",    vibe: "Mint · purple · pink",    stops: ["#67E8F9","#A855F7","#EC4899"], dir: "to right" },
+      { name: "Fire ember",      vibe: "Red · orange · amber",    stops: ["#EF4444","#F97316","#FBBF24"], dir: "to right" },
+      { name: "Midnight bloom",  vibe: "Deep navy · violet",      stops: ["#1E1B4B","#7C3AED"],           dir: "to right" },
+      { name: "Forest to lime",  vibe: "Deep green · lime",       stops: ["#064E3B","#A3E635"],           dir: "to right" },
+      { name: "Rose gold dream", vibe: "Blush · gold · peach",    stops: ["#FBCFE8","#FDE68A","#FCA5A5"], dir: "to right" },
+      { name: "Cyber neon",      vibe: "Hot pink · electric blue",stops: ["#F0047F","#0AEFFF"],           dir: "to right" },
+      { name: "Lavender cloud",  vibe: "Soft purple · sky blue",  stops: ["#C4B5FD","#BAE6FD"],           dir: "to right" },
+    ]
+  }
+];
+
+const tbody = document.getElementById('tbody');
+
+sections.forEach(sec => {
+  const secRow = document.createElement('tr');
+  secRow.className = 'section-row';
+  secRow.innerHTML = `<td colspan="5">${sec.label}</td>`;
+  tbody.appendChild(secRow);
+
+  sec.items.forEach(p => {
+    const css = `linear-gradient(${p.dir}, ${p.stops.join(', ')})`;
+    const tr = document.createElement('tr');
+
+    const dotsHtml = p.stops.map(s =>
+      `<span style="display:inline-flex;align-items:center;gap:3px;margin-right:6px">
+        <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${s};border:0.5px solid var(--border);flex-shrink:0"></span>${s}
+      </span>`
+    ).join('<span style="color:var(--text-muted);font-size:10px">→</span>');
+
+    tr.innerHTML = `
+      <td><div class="swatch" style="background:${css}"></div></td>
+      <td><div class="name">${p.name}</div><div class="vibe">${p.vibe}</div></td>
+      <td><div class="hexes">${dotsHtml}</div></td>
+      <td style="font-size:11px;font-family:var(--font-mono);color:var(--text-muted)">${p.dir}</td>
+      <td></td>`;
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.onclick = () => {
+      navigator.clipboard.writeText(`background: ${css};`);
+      btn.textContent = 'Done!';
+      setTimeout(() => btn.textContent = 'Copy', 1800);
+    };
+    tr.cells[4].appendChild(btn);
+    tbody.appendChild(tr);
+  });
+});
+</script>
+</body>
+</html>
