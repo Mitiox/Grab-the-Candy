@@ -27,14 +27,14 @@
 
             /* Roundness of the candy , if equal to height and width , we get a circle candy */
             border-radius: 10px;
-            cursor: pointer;
+            cursor: pointer;  
             /* Unused , might use later*/
             font-weight: 600;
             letter-spacing: 0.5px;
             /* Makes it feels like Candy is floating */
             box-shadow: 0 8px 20px rgba(107, 75, 163, 0.4);
             /* Soul of the Candy , this it what makes it glide instead of snap */
-            transition: transform 0.5s ease, box-shadow 0.5s, background 0.5s; 
+            transition: transform 0.5s ease, box-shadow 0.5s, background 0.5s , blur 0.5s ,filter 0.5s;
 
         }
 
@@ -42,8 +42,9 @@
             /* Shadow grows bigger , as if cnady rose up */
             box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
             /* The backbone , sends candy to left */
-            transform: translateX(-300px);
+           transform: translateX(-300px) scale(0.85);
             /* Attention to detail mamamia */
+
             cursor: grab;
 
         }
