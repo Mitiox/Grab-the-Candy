@@ -6,7 +6,8 @@
     <title>Game</title>
     <style>
         body {
-           background: linear-gradient(to right, #10B981, #6366F1);     /* Background of the whole page , cand be a solid colour or a gradient */
+           background: linear-gradient(to right, #0EA5E9, #06EE9E); 
+            /* Background of the whole page , cand be a solid colour or a gradient */
             margin: 0px;/* Margin by defualt is 8px, so we set it to 0px to remove the default margin */ 
             height: 100vh; /* Page height is 100% of the viewport height */
             display: flex; /* To control alignement of elements */
@@ -42,12 +43,15 @@
             /* Shadow grows bigger , as if cnady rose up */
             box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
             /* The backbone , sends candy to left */
-           transform: translateX(-300px) scale(0.85);
+           
+           transform: translateX(-300px);
+          
             /* Attention to detail mamamia */
 
             cursor: grab;
-
         }
+
+    
 
         .Candy:active { /* Psuedo state when cursor grabs the candy */
             /* Candy runs down 300px */

@@ -4,13 +4,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Background Gradients</title> 
 </head>
-<body>
+
 <style>
+  body { background: rgb(221, 216, 216) }
   .tbl { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; margin-top: 1rem; }
   .tbl th { text-align: left; padding: 8px 12px; color: var(--text-muted); font-weight: 500; border-bottom: 0.5px solid var(--border); font-size: 12px; }
   .tbl td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
   .tbl tr:last-child td { border-bottom: none; }
-  .swatch { width: 100%; height: 44px; border-radius: 6px; border: 0.5px solid var(--border); }
+  .swatch { width: 100%; height: 44px; border-radius: 6px; border: 1px solid #000; box-sizing: border-box; }
+  .paired-swatch { width: 100%; height: 44px; border-radius: 6px; overflow: hidden; display: flex; border: 1px solid #000; box-sizing: border-box; }
+  .pair-block { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; text-transform: capitalize; padding: 0 6px; line-height: 1.1; }
   .name { font-weight: 500; color: var(--text-primary); font-size: 13px; }
   .vibe { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
   .hexes { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); line-height: 1.7; }
@@ -24,7 +27,7 @@
   th:nth-child(5) { width: 8%; }
 </style>
 
-
+<body>
 <table class="tbl">
   <thead>
     <tr>
@@ -65,6 +68,28 @@ const sections = [
       { name: "Cyber neon",      vibe: "Hot pink · electric blue",stops: ["#F0047F","#0AEFFF"],           dir: "to right" },
       { name: "Lavender cloud",  vibe: "Soft purple · sky blue",  stops: ["#C4B5FD","#BAE6FD"],           dir: "to right" },
     ]
+  },
+  {
+    label: "Paired colors",
+    items: [
+      { name: "Butter + Green",     vibe: "Butter · Green",      stops: ["#ffefb3","#013e37"], dir: "to right", pair: true, labels: ["Butter","Green"] },
+      { name: "Cream vanilla + Cherry cola", vibe: "Cream vanilla · Cherry cola", stops: ["#efe6dd","#9a0002"], dir: "to right", pair: true, labels: ["Cream vanilla","Cherry cola"] },
+      { name: "Aureolin + Bistre",  vibe: "Aureolin · Bistre",    stops: ["#fbe311","#261606"], dir: "to right", pair: true, labels: ["Aureolin","Bistre"] },
+      { name: "Lime green + Vibrant Red", vibe: "Lime green · Vibrant red", stops: ["#d3f00a","#f9100c"], dir: "to right", pair: true, labels: ["Lime green","Vibrant red"] },
+      { name: "Violet + Imperial Red", vibe: "Violet · Imperial red", stops: ["#321847","#f15153"], dir: "to right", pair: true, labels: ["Violet","Imperial red"] },
+      { name: "Magenta + Yellow", vibe: "Magenta · Yellow", stops: ["#ff006e","#ffd60a"], dir: "to right", pair: true, labels: ["Magenta","Yellow"] },
+      { name: "Ocean + Lemonade", vibe: "Ocean · Lemonade", stops: ["#1e45fc","#cdf12b"], dir: "to right", pair: true, labels: ["Ocean","Lemonade"] },
+      { name: "Sunburst + Mocha", vibe: "Sunburst · Mocha", stops: ["#ffa602","#432c1c"], dir: "to right", pair: true, labels: ["Sunburst","Mocha"] },
+      { name: "Teal + Mimosa", vibe: "Teal · Mimosa", stops: ["#00555a","#ffc94b"], dir: "to right", pair: true, labels: ["Teal","Mimosa"] },
+      { name: "Plum wine + Linen cloud", vibe: "Plum wine · Linen cloud", stops: ["#5e4074","#f7f9ec"], dir: "to right", pair: true, labels: ["Plum wine","Linen cloud"] },
+      { name: "Chartreuse + Gun Metal", vibe: "Chartreuse · Gun Metal", stops: ["#e1ff51","#00272c"], dir: "to right", pair: true, labels: ["Chartreuse","Gun Metal"] },
+      { name: "Maroon + Xanthous", vibe: "Maroon · Xanthous", stops: ["#780115","#f7b638"], dir: "to right", pair: true, labels: ["Maroon","Xanthous"] },
+      { name: "Buttermilk + Mid Blue", vibe: "Buttermilk · Mid Blue", stops: ["#fff2bd","#285ccc"], dir: "to right", pair: true, labels: ["Buttermilk","Mid Blue"] },
+      { name: "Lavender + Velvet", vibe: "Lavender · Velvet", stops: ["#d3c5f6","#3b2a60"], dir: "to right", pair: true, labels: ["Lavender","Velvet"] },
+      { name: "Salmon + Mid Green", vibe: "Salmon · Mid Green", stops: ["#ff947a","#025259"], dir: "to right", pair: true, labels: ["Salmon","Mid Green"] },
+      { name: "Jet black + Orchid", vibe: "Jet black · Orchid", stops: ["#1D1D1D","#E5BDDF"], dir: "to right", pair: true, labels: ["Jet black","Orchid"] },
+      { name: "Wine Ash + Turquoise", vibe: "Wine Ash · Turquoise", stops: ["#32292f","#99E1D9"], dir: "to right", pair: true, labels: ["Wine Ash","Turquoise"] }
+    ]
   }
 ];
 
@@ -77,7 +102,15 @@ sections.forEach(sec => {
   tbody.appendChild(secRow);
 
   sec.items.forEach(p => {
-    const css = `linear-gradient(${p.dir}, ${p.stops.join(', ')})`;
+    const css = p.pair && p.stops.length === 2
+      ? `linear-gradient(${p.dir}, ${p.stops[0]} 0%, ${p.stops[0]} 50%, ${p.stops[1]} 50%, ${p.stops[1]} 100%)`
+      : `linear-gradient(${p.dir}, ${p.stops.join(', ')})`;
+    const previewHtml = p.pair && p.stops.length === 2
+      ? `<div class="paired-swatch">
+           <div class="pair-block" style="background:${p.stops[0]};color:${p.stops[1]};">${p.labels?.[0] ?? p.name.split(' + ')[0]}</div>
+           <div class="pair-block" style="background:${p.stops[1]};color:${p.stops[0]};">${p.labels?.[1] ?? p.name.split(' + ')[1]}</div>
+         </div>`
+      : `<div class="swatch" style="background:${css}"></div>`;
     const tr = document.createElement('tr');
 
     const dotsHtml = p.stops.map(s =>
@@ -87,7 +120,7 @@ sections.forEach(sec => {
     ).join('<span style="color:var(--text-muted);font-size:10px">→</span>');
 
     tr.innerHTML = `
-      <td><div class="swatch" style="background:${css}"></div></td>
+      <td>${previewHtml}</td>
       <td><div class="name">${p.name}</div><div class="vibe">${p.vibe}</div></td>
       <td><div class="hexes">${dotsHtml}</div></td>
       <td style="font-size:11px;font-family:var(--font-mono);color:var(--text-muted)">${p.dir}</td>
